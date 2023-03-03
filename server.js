@@ -1,12 +1,22 @@
-import express from "express";
-import * as dotenv from "dotenv";
+const express = require("express");
+const dotenv = require("dotenv");
+const mongoose = require("mongoose");
+const routes = require("./routes/index.js");
+const connection = require("./config/connection");
+dotenv.config();
 
-dotenv.config()
-const app= express()
-app.use(express.json())
+const app = express();
+const PORT = process.env.PORT || 8000;
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static("public"));
+app.use(routes);
 
-
-
-
-app.listen(process.env.PORT,()=> console.log(`express server listenting on PORT${process.env.PORT}`))
+// mongoose.set("debug", true);
+connection.once("mongodb connection ", (conn) => {
+  console.log("connection status", conn);
+  app.listen(PORT, () => {
+    console.log(`API server running on port ${PORT}!`);
+  });
+});

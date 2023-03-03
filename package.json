@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "\"\"",
   "main": "server.js",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "test": "jest",
-    "dev":"nodemon --watch server.js"
+    "dev": "nodemon --watch server.js", 
+    "start": "node server.js"
   },
   "author": "",
   "license": "MIT",
